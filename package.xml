@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>dummy_trajectory</name>
+  <version>0.0.1</version>
+  <description>
+    dummy_trajectory
+  </description>
+
+  <maintainer email="feng.xiao16@imperial.ac.uk">Feng Xiao</maintainer>
+
+  <author>Feng Xiao</author>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>cmake_modules</depend>
+  <depend>message_runtime</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>roscpp</depend>
+  <depend>mavros_msgs</depend>
+  <depend>mavros</depend>
+  <depend>mavros_extras</depend>
+  <depend>nav_msgs</depend>
+</package>
