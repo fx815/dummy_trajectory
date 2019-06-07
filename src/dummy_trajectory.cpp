@@ -1,6 +1,7 @@
 #include <ros/ros.h>
 #include <mavros_msgs/GlobalPositionTarget.h>
 #include <ros/time.h>
+#include <sensor_msgs/NavSatFix.h>
 
 int FRAME_GLOBAL_INT = 5;
 int FRAME_GLOBAL_REL_ALT = 6;
@@ -29,14 +30,19 @@ int main(int argc, char **argv){
 	ros::Publisher global_pos_pub = n.advertise<mavros_msgs::GlobalPositionTarget>
 			("mavros/setpoint_position/global", 1);
 	ros::Rate rate(20.0);
+
+	sensor_msgs::NavSatFixConstPtr gps_msg=ros::topic::waitForMessage<sensor_msgs::NavSatFix>("/mavros/global_position/raw/fix");
+    double target_latitude = gps_msg->latitude;
+    double target_longitude = gps_msg->longitude;
+    double target_altitude = gps_msg->altitude;
     
     while(ros::ok()){
     	
     	target.header.stamp = ros::Time::now();
-	    target.coordinate_frame=FRAME_GLOBAL_REL_ALT;
-		target.latitude = 51.1;
-		target.longitude = -0.24;
-		target.altitude = 3;
+	    target.coordinate_frame=FRAME_GLOBAL_INT;
+		target.latitude = target_latitude;
+		target.longitude = target_longitude;
+		target.altitude = target_altitude+3;
 
 		global_pos_pub.publish(target);
 		
